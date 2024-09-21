@@ -83,7 +83,7 @@
               <button class="btn text-white bg-[#360490] rounded-3xl">
                <span>Life</span>
                <img src="images/heart.svg" alt="">
-               <span id="life">4</span>                
+               <span id="life">5</span>                
              </button>
              <!-- Display score -->
              <button class="btn text-white bg-[#360490]">
@@ -95,19 +95,20 @@
         </div>
       </section>
       <!-- Score -->
-      <section class="score hidden flex justify-center items-center min-h-screen">
+      <section id="end-score" class="score hidden flex justify-center items-center min-h-screen">
         <div class="text-white text-center space-y-6 p-10 rounded-lg bg-[#FFFFFF33]">
+          <p class="text-3xl text-white">Game Over !</p>
           <h1 class="text-8xl">
             <span class="font-extrabold">Score</span>
-            <span>14</span>
+            <span id="end-score-value">14</span>
           </h1>
-          <button>Play Again</button>
+          <button onclick="play()" id="play-again" class="p-3 rounded-xl font-bold text-black bg-white">Play Again</button>
           <p class="text-xl">Practice will make you a pro</p>
         </div>
       </section>
     </main>
     <script src="js/script.js"></script>
-    <script src="js/alpha-clash.js"></script>
+    <script src="js/utilities.js"></script>
 
   </body>
 </html>

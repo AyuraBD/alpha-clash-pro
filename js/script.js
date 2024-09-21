@@ -1,36 +1,49 @@
-function hideElement (elementId) {
-    const element = document.getElementById(elementId);
-    element.classList.add('hidden');
+function handleKeywordPress (e){
+    const playerPressed = e.key;
+
+    if (playerPressed === 'Escape'){
+        gameOver ();
+    }
+    const generatedAlpha = getTextElementById('current-alpha');
+    const generated = generatedAlpha.toLocaleLowerCase();
+    if(playerPressed === generated){
+        const scoreValue = getElementValueById('score');
+        const updateScoreValue = scoreValue + 1;
+        setTextElementById('score', updateScoreValue);
+        setTextElementById('end-score-value', updateScoreValue);
+        removeBgOfElement(generated);
+        continueGame();
+    } else{
+        const lifeValue = getElementValueById('life');
+        const updateLifeValue = lifeValue - 1;
+        setTextElementById('life', updateLifeValue);
+        
+        if(lifeValue === 0){
+            gameOver ();                        
+        }
+    }
+}
+document.addEventListener('keyup', handleKeywordPress );
+
+
+function continueGame (){
+    const randomAlphabet = getRandomAlphabet();
+    setTextElementById('current-alpha', randomAlphabet);
+    setBgOfElement(randomAlphabet);
+}
+function play (){
+    addClassElementById('home');
+    addClassElementById('end-score')
+    removeClassElementById('play-ground');
+    continueGame();
 }
 
-function showElement (elementId) {
-    const element = document.getElementById(elementId);
-    element.classList.remove('hidden');
-}
+function gameOver (){
+    setTextElementById ('score', 0);
+    setTextElementById ('life', 5);
+    addClassElementById('play-ground');
+    removeClassElementById('end-score');
 
-function setBgColorById (elementId){
-    const element = document.getElementById(elementId);
-    element.classList.add('bg-orange-400');
-}
-
-function removeBgColorById (elementId){
-    const element = document.getElementById(elementId);
-    element.classList.remove('bg-orange-400');
-}
-
-function getARandomAlpa (){
-    // get or create an alphabet array
-    const alphaString = 'abcdefghijklmnopqrstuvwxyz';
-    const alpha = alphaString.split('');
-    // console.log(alpha);
-
-    // get a random index between 0-25
-
-    const randomNumber = Math.random () * 25;
-    const index = Math.round (randomNumber);
-    
-    const alphabet = alpha[index];
-    // console.log(index, alphabet);
-    return alphabet;
-
+    const currentAlpha = getTextElementById('current-alpha');
+    removeBgOfElement(currentAlpha);
 }
